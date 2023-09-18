@@ -1,0 +1,34 @@
+version: '3.6'
+services:
+    mysql:
+        image: mysql:latest
+        container_name: meu-servico-mysql
+        hostname: 5f62061e95e5
+        environment:
+            MYSQL_ROOT_PASSWORD: root123
+            MYSQL_USER: rafael
+            MYSQL_PASSWORD: rafael123
+            PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            GOSU_VERSION: 1.16
+            MYSQL_MAJOR: innovation
+            MYSQL_VERSION: 8.1.0-1.el8
+            MYSQL_SHELL_VERSION: 8.0.34-1.el8
+        volumes:
+            - /var/lib/mysql
+        ports:
+            - '3000:3306'
+            - '30001:33060'
+        runtime: runc
+        detach: true
+
+    # livraria-ecom:
+    #     build:
+    #         context: ./
+    #         dockerfile: ./Dockerfile
+    #     # command: npm run migration:run && npm run start:prod
+    #     volumes:
+    #         - ./src:/usr/local/app/
+    #     ports:
+    #         - '5000:3000'
+    #     depends_on:
+    #         - mysql

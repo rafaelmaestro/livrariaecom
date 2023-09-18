@@ -6,4 +6,3 @@ tmp/
 temp/
 dist/
 test/coverage/
-.npmrc
