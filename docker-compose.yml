@@ -6,8 +6,6 @@ services:
         hostname: 5f62061e95e5
         environment:
             MYSQL_ROOT_PASSWORD: root123
-            MYSQL_USER: rafael
-            MYSQL_PASSWORD: rafael123
             PATH: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
             GOSU_VERSION: 1.16
             MYSQL_MAJOR: innovation
@@ -15,11 +13,12 @@ services:
             MYSQL_SHELL_VERSION: 8.0.34-1.el8
         volumes:
             - /var/lib/mysql
+            # Monta o arquivo SQL personalizado durante a inicialização
+            - ./initdb:/docker-entrypoint-initdb.d
         ports:
             - '3000:3306'
             - '30001:33060'
         runtime: runc
-        detach: true
 
     # livraria-ecom:
     #     build:
