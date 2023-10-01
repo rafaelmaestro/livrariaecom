@@ -1,8 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { EnderecoUsuarioModel } from './endereco.model'
 
 @Entity('usuario')
-export class UsuarioModel {
+export class UsuarioModel extends BaseEntity {
     @PrimaryColumn()
     cpf: string
 
@@ -18,6 +18,6 @@ export class UsuarioModel {
     @Column()
     senha: string
 
-    @OneToMany(() => EnderecoUsuarioModel, (endereco) => endereco.usuario)
+    @OneToMany(() => EnderecoUsuarioModel, (endereco) => endereco.usuario, { eager: true })
     enderecos: EnderecoUsuarioModel[]
 }

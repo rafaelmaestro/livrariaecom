@@ -41,4 +41,14 @@ export class UsuarioRepository {
             await queryRunner.release()
         }
     }
+
+    async findOneByEmail(email: string) {
+        const usuario = await UsuarioModel.findOne({ where: { email } })
+        return usuario
+    }
+
+    async findOneByCpf(cpf: string) {
+        const usuario = await UsuarioModel.findOne({ where: { cpf } })
+        return usuario
+    }
 }

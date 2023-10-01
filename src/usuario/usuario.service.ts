@@ -17,7 +17,11 @@ export class UsuarioService {
         return usuarioCriado
     }
 
-    findOne(id: number) {
-        return `This action returns a #${id} usuario`
+    findByEmail(email: string) {
+        return this.usuarioRepository.findOneByEmail(email)
+    }
+
+    findByCpf(cpf: string) {
+        return this.usuarioRepository.findOneByCpf(cpf)
     }
 }

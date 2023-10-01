@@ -8,6 +8,7 @@ export class UsuarioController {
 
     @Post()
     create(@Body() createUsuarioDto: CreateUsuarioDto) {
-        return this.usuarioService.create(createUsuarioDto)
+        return this.usuarioService.findByEmail(createUsuarioDto.email)
+        // return this.usuarioService.create(createUsuarioDto)
     }
 }
