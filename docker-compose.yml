@@ -19,15 +19,24 @@ services:
             - '3000:3306'
             - '30001:33060'
         runtime: runc
+        networks:
+            - minha-rede
+# Ainda não está funcionando. Executar apenas o msql e subir o serviço da livraria pelo npm start
+# livrariaecom:
+#     build:
+#         context: ./
+#         dockerfile: ./Dockerfile
+#     volumes:
+#         - ./src:/usr/local/app/
+#     ports:
+#         - '5000:3000'
+#     depends_on:
+#         - mysql
+#     networks:
+#         - minha-rede
+#     env_file:
+#         - .env
 
-    # livraria-ecom:
-    #     build:
-    #         context: ./
-    #         dockerfile: ./Dockerfile
-    #     # command: npm run migration:run && npm run start:prod
-    #     volumes:
-    #         - ./src:/usr/local/app/
-    #     ports:
-    #         - '5000:3000'
-    #     depends_on:
-    #         - mysql
+networks:
+    minha-rede:
+        driver: bridge
