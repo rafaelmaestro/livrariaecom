@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
+import { Usuario } from '../usuario/entities/usuario.entity'
 import { UsuarioService } from '../usuario/usuario.service'
+import { UserPayload } from './interfaces/UserPayload'
+import { UserToken } from './interfaces/UserToken'
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly usuarioService: UsuarioService) {}
+    constructor(private readonly usuarioService: UsuarioService, private readonly jwtService: JwtService) {}
     async validateUser(cpf: string, senha: string) {
-        // throw new Error('Not implemented yet!')
         const usuario = await this.usuarioService.findByCpf(cpf)
-
-        console.log(`USUARIO: ${JSON.stringify(usuario)}`)
 
         if (usuario) {
             const isSenhaValida = await bcrypt.compare(senha, usuario.senha)
@@ -23,5 +24,20 @@ export class AuthService {
         }
 
         throw new Error('Cpf ou senha fornecidos são inválidos!')
+    }
+
+    login(user: Usuario): UserToken {
+        const payload: UserPayload = {
+            cpf: user.cpf,
+            sub: Number(user.cpf.replace(/\D/g, '')),
+            email: user.email,
+            nome: user.nome,
+        }
+
+        const jwtToken = this.jwtService.sign(payload)
+
+        return {
+            access_token: jwtToken,
+        }
     }
 }
