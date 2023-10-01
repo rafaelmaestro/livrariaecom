@@ -1,0 +1,101 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "livrariaecom",
+    "dateExported": "2023-10-01T17:09:34.116Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "5043d10c-e5c2-41bb-a1f7-e3296e92ca9d",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "login",
+            "url": "localhost:5000/livraria-ecom/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-10-01T16:46:09.799Z",
+            "modified": "2023-10-01T17:09:17.696Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": \"51777789906\",\n  \"senha\": \"Abc@123\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9d135714-70f3-46a5-9cb4-c60df580556f",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/criar",
+            "url": "localhost:5000/livraria-ecom/usuario",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-10-01T16:47:08.688Z",
+            "modified": "2023-10-01T17:09:03.616Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": \"51777789906\",\n  \"email\": \"rafaelmaestro@live.com.br\",\n  \"nome\": \"Rafael Maestro\",\n  \"telefone\": \"11995885668\",\n  \"senha\": \"Abc@123\",\n  \"rua\": \"Rua Castro Alves, 65\",\n  \"cep\": \"18136-090\",\n  \"estado\": \"SP\",\n  \"cidade\": \"São Roque\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "21be6ef2-5b8b-474b-b1e9-9f3dc3bc951c",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "hello",
+            "url": "localhost:5000/livraria-ecom",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-10-01T16:47:16.158Z",
+            "modified": "2023-10-01T16:47:16.158Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NjE3ODI1OCwiZXhwIjoxNjk2MTgxODU4fQ.vt-mN85tWWqilnqg89m6qkj05VLrEE6fZh2u5hq8N-A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5123040e-3f19-4624-aa6c-aad75ac80530",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "me",
+            "url": "localhost:5000/livraria-ecom/me",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-10-01T16:47:25.989Z",
+            "modified": "2023-10-01T16:47:25.989Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NjE3ODI1OCwiZXhwIjoxNjk2MTgxODU4fQ.vt-mN85tWWqilnqg89m6qkj05VLrEE6fZh2u5hq8N-A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "2c8e711e-692d-4ec9-aeb9-8250656f9b81",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/findByCpf",
+            "url": "localhost:5000/livraria-ecom/usuario/51777789906",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-10-01T16:52:12.670Z",
+            "modified": "2023-10-01T17:09:24.953Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NjE3ODI1OCwiZXhwIjoxNjk2MTgxODU4fQ.vt-mN85tWWqilnqg89m6qkj05VLrEE6fZh2u5hq8N-A"
+            },
+            "tests": []
+        }
+    ]
+}
