@@ -79,4 +79,4 @@ Para realizar login de usuário é necessário realizar POST na rota `localhost:
 
 _OBS: Caso utilize o ThunderClient para requisições no VSCode, o arquivo `thunder-collection_livrariaecom.json` na raiz do projeto contém exemplos de requisições._
 
-A rota de login retornará um access_token que deverá ser salvo pelo frontend para requisições futuras às rotas protegidas pelo guard jwt. O token deve ser informado nas requisições futuras como Authorization Bearer.
+_A rota de login retornará um access_token que deverá ser salvo pelo frontend para requisições futuras às rotas protegidas pelo guard jwt. O token deve ser informado nas requisições futuras como Authorization Bearer._
