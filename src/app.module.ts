@@ -9,11 +9,12 @@ import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
 import { UsuarioModule } from './usuario/usuario.module'
+import { EstoqueModule } from './estoque/estoque.module';
 
 setEnv()
 
 @Module({
-    imports: [...Modules, TypeOrmModule?.forRoot({ ...OrmModuleOptions }), UsuarioModule, AuthModule],
+    imports: [...Modules, TypeOrmModule?.forRoot({ ...OrmModuleOptions }), UsuarioModule, AuthModule, EstoqueModule],
     controllers: [AppController],
     providers: [
         AppService,
