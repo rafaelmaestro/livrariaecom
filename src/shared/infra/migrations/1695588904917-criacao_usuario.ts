@@ -14,11 +14,12 @@ export class CriacaoUsuario1695588904917 implements MigrationInterface {
 
         await queryRunner.query(
             `CREATE TABLE IF NOT EXISTS endereco_usuario (
+                id INTEGER PRIMARY KEY AUTO_INCREMENT,
                 rua VARCHAR(155) NOT NULL,
                 cep VARCHAR(20) NOT NULL,
                 estado VARCHAR(20) NOT NULL,
                 cidade VARCHAR (30) NOT NULL,
-                cpf VARCHAR(15) PRIMARY KEY,
+                cpf VARCHAR(15),
                 FOREIGN KEY (cpf) REFERENCES usuario(cpf)
             )`
         )

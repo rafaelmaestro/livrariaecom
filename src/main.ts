@@ -17,6 +17,8 @@ async function bootstrap() {
     app.useGlobalPipes(
         new ValidationPipe({
             transform: true,
+            whitelist: true,
+            forbidNonWhitelisted: true,
         })
     )
     //Faz com que o Nest cuide das injeções de dependencia do Class-Validator

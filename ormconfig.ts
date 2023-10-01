@@ -4,7 +4,11 @@ import { setEnv } from './config'
 
 setEnv()
 
-const entities = ['dist/src/modules/**/infra/models/*.model{.ts,.js}', 'dist/src/shared/infra/models/*.model{.ts,.js}']
+const entities = [
+    'dist/src/modules/**/infra/models/*.model{.ts,.js}',
+    'dist/src/shared/infra/models/*.model{.ts,.js}',
+    'dist/src/**/models/*.model{.ts,.js}',
+]
 
 const DataSourceConfig = {
     name: 'default',
