@@ -1,6 +1,7 @@
 import { INestApplication, Logger, ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { useContainer } from 'class-validator'
+import { json, urlencoded } from 'express'
 import { AppModule } from './app.module'
 import { TimeoutInterceptor } from './shared/infra/middleware/TimeoutInterceptor.middleware'
 
@@ -9,6 +10,9 @@ async function bootstrap() {
     app = await NestFactory.create(AppModule, {
         bufferLogs: false,
     })
+
+    app.use(json({ limit: '50mb' }))
+    app.use(urlencoded({ extended: true, limit: '50mb' }))
     app.setGlobalPrefix(process.env.npm_package_name)
     app.enableCors({ origin: '*' })
 

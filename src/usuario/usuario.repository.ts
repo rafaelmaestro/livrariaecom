@@ -13,10 +13,8 @@ export class UsuarioRepository {
         await queryRunner.connect()
         await queryRunner.startTransaction()
         try {
-            const [usuarioCriado, enderecoCriado] = await Promise.all([
-                queryRunner.manager.save(UsuarioModel, usuario),
-                queryRunner.manager.save(EnderecoUsuarioModel, usuario),
-            ])
+            const usuarioCriado = await queryRunner.manager.save(UsuarioModel, usuario)
+            const enderecoCriado = await queryRunner.manager.save(EnderecoUsuarioModel, usuario)
 
             await queryRunner.commitTransaction()
             return {
@@ -49,6 +47,7 @@ export class UsuarioRepository {
 
     async findOneByCpf(cpf: string) {
         const usuario = await UsuarioModel.findOne({ where: { cpf } })
+
         return usuario
     }
 }
