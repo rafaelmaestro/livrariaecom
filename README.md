@@ -114,7 +114,7 @@ Para registrar um novo livro em estoque , é necessário enviar um POST na rota 
 
 ## Buscar Livros Em Estoque
 
-Para buscar os livros em estoque , é necessário enviar um GET na rota `localhost:5000/livraria-ecom/estoque`, essa requisição é protegida por guard e deve ser enviado no campo Authorization header o access_token retornado na requisição de login como `Bearer`. Nos query parameters da requisição devem ser enviados os parâmetros `pagina: number` e `limite: number`, conforme o exemplo à seguir:
+Para buscar os livros em estoque , é necessário enviar um GET na rota `localhost:5000/livraria-ecom/estoque`, essa requisição é protegida por guard e deve ser enviado no campo Authorization header o access_token retornado na requisição de login como `Bearer`. Essa requisição **é paginada**. Nos query parameters da requisição devem ser enviados os parâmetros `pagina: number` e `limite: number`, conforme o exemplo à seguir:
 
 ```
 localhost:5000/livraria-ecom/estoque?pagina=0&limite=5
