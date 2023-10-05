@@ -8,6 +8,13 @@ import { LivroModel } from './models/livro.model'
 
 @Injectable()
 export class EstoqueRepository {
+    findAll(pagina: number, limite: number) {
+        return LivroModel.find({
+            relations: ['autor', 'editora', 'estoque'],
+            skip: pagina,
+            take: limite,
+        })
+    }
     constructor(private readonly dataSource: DataSource) {}
 
     async save(estoque: CreateLivroDto) {
@@ -15,20 +22,34 @@ export class EstoqueRepository {
         await queryRunner.connect()
         await queryRunner.startTransaction()
         try {
-            const [livroCriado, autorCriado, editoraCriada, estoqueCriado] = await Promise.all([
-                queryRunner.manager.save(AutorModel, estoque),
-                queryRunner.manager.save(EditoraModel, estoque),
-                queryRunner.manager.save(LivroModel, estoque),
-                queryRunner.manager.save(EstoqueModel, estoque),
-            ])
+            const autorCriado = await queryRunner.manager.save(AutorModel, estoque.autor)
+            const editoraCriada = await queryRunner.manager.save(EditoraModel, estoque.editora)
+            const livroCriado = await queryRunner.manager.save(LivroModel, estoque)
+            const estoqueCriado = await queryRunner.manager.save(EstoqueModel, estoque.estoque)
 
-            console.log(`Livro criado: ${JSON.stringify(livroCriado)}`)
-            console.log(`Autor criado: ${JSON.stringify(autorCriado)}`)
-            console.log(`Editora criada: ${JSON.stringify(editoraCriada)}`)
-            console.log(`Estoque criado: ${JSON.stringify(estoqueCriado)}`)
+            const livro = {
+                isbn: livroCriado.isbn,
+                nome: livroCriado.nome,
+                valor: livroCriado.valor,
+                imagem: null,
+                editora: {
+                    cnpj: editoraCriada.cnpj,
+                    nome: editoraCriada.nome,
+                    telefone: editoraCriada.telefone,
+                    email: editoraCriada.email,
+                },
+                autor: {
+                    email: autorCriado.email,
+                    nome: autorCriado.nome,
+                },
+                estoque: {
+                    sku: estoqueCriado.sku,
+                    quantidade: estoqueCriado.quantidade,
+                },
+            }
 
             await queryRunner.commitTransaction()
-            return 'not implemented'
+            return livro
         } catch (error) {
             await queryRunner.rollbackTransaction()
             throw error

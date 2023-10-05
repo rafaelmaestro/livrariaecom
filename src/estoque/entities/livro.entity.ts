@@ -6,7 +6,7 @@ export class Livro {
     isbn: string
     nome: string
     valor: number
-    imagem: string
+    imagem?: string
     editora: Editora
     autor: Autor
     estoque: Estoque

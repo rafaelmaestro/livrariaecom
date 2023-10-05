@@ -24,7 +24,7 @@ export class CriacaoEstoque1695588788033 implements MigrationInterface {
                 isbn VARCHAR(100) PRIMARY KEY,
                 nome VARCHAR(255) NOT NULL,
                 valor FLOAT NOT NULL,
-                imagem TEXT,
+                imagem BLOB,
                 nome_autor VARCHAR(255) NOT NULL,
                 cnpj_editora VARCHAR(55) NOT NULL,
                 FOREIGN KEY (nome_autor) REFERENCES autor(nome),

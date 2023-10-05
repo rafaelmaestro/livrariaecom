@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, Query } from '@nestjs/common'
 import { CreateLivroDto } from './dto/create-livro.dto'
 import { EstoqueService } from './estoque.service'
 
@@ -9,5 +9,10 @@ export class EstoqueController {
     @Post()
     create(@Body() createLivroDto: CreateLivroDto) {
         return this.estoqueService.create(createLivroDto)
+    }
+
+    @Get()
+    findAll(@Query('pagina') pagina: number, @Query('limite') limite: number) {
+        return this.estoqueService.findAll(pagina, limite)
     }
 }

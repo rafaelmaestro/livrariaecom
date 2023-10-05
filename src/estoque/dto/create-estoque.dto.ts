@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator'
+import { IsNumber, IsOptional, IsString } from 'class-validator'
 import { Estoque } from '../entities/estoque.entity'
 
 export class CreateEstoqueDto extends Estoque {
@@ -9,5 +9,6 @@ export class CreateEstoqueDto extends Estoque {
     quantidade: number
 
     @IsString()
+    @IsOptional()
     isbn: string
 }
