@@ -8,14 +8,15 @@ import { LivroModel } from './models/livro.model'
 
 @Injectable()
 export class EstoqueRepository {
-    findAll(pagina: number, limite: number) {
+    constructor(private readonly dataSource: DataSource) {}
+
+    async findAll(pagina: number, limite: number) {
         return LivroModel.find({
             relations: ['autor', 'editora', 'estoque'],
             skip: pagina,
             take: limite,
         })
     }
-    constructor(private readonly dataSource: DataSource) {}
 
     async save(estoque: CreateLivroDto) {
         const queryRunner = this.dataSource.createQueryRunner()
