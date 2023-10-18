@@ -163,3 +163,40 @@ Para buscar os livros em estoque , é necessário enviar um GET na rota `localho
 ```
 localhost:5000/livraria-ecom/estoque?pagina=0&limite=5
 ```
+
+O retorno seguirá o padrão à seguir:
+
+```json
+{
+    "data": [
+        {
+            "isbn": "9788550804606",
+            "nome": "Arquitetura Limpa",
+            "valor": 99.9,
+            "imagem": null,
+            "nome_autor": "Robert C. Martin",
+            "cnpj_editora": "04713695000100",
+            "autor": {
+                "email": "rafaelmaestro@live.com",
+                "nome": "Robert C. Martin"
+            },
+            "editora": {
+                "cnpj": "04713695000100",
+                "nome": "Alta Books",
+                "telefone": "2132788069",
+                "email": "suporte@altabooks.com"
+            },
+            "estoque": {
+                "sku": "1515",
+                "quantidade": 10,
+                "isbn": "9788550804606"
+            }
+        }
+    ],
+    "paginacao": {
+        "pagina": 0,
+        "limite": 1,
+        "total": 1
+    }
+}
+```
