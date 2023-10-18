@@ -24,4 +24,28 @@ export class EstoqueService {
             },
         }
     }
+
+    async findAllAutores(pagina: number, limite: number) {
+        const autores = await this.estoqueRepository.findAllAutores(pagina, limite)
+        return {
+            data: autores,
+            paginacao: {
+                pagina,
+                limite,
+                total: autores.length,
+            },
+        }
+    }
+
+    async findAllEditoras(pagina: number, limite: number) {
+        const editoras = await this.estoqueRepository.findAllEditoras(pagina, limite)
+        return {
+            data: editoras,
+            paginacao: {
+                pagina,
+                limite,
+                total: editoras.length,
+            },
+        }
+    }
 }

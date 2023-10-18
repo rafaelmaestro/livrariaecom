@@ -83,9 +83,53 @@ _A rota de login retornará um access_token que deverá ser salvo pelo frontend 
 
 # Livros (Estoque)
 
+## Buscar Autores
+
+Para registrar um livro em estoque é necessário fornecer dados do autor, essa rota retorna os autores cadastrados de forma paginada, realizando um GET na rota `localhost:5000/livraria-ecom/estoque/autores` (protegida por guard), devem ser enviados os parâmetros de pagina e limite e o retorno segue o modelo de exemplo à seguir:
+
+```json
+{
+    "data": [
+        {
+            "email": "rafaelmaestro@live.com",
+            "nome": "Robert C. Martin"
+        }
+    ],
+    "paginacao": {
+        "pagina": 0,
+        "limite": 5,
+        "total": 1
+    }
+}
+```
+
+## Buscar Editoras
+
+Para registrar um livro em estoque é necessário fornecer dados da editora, essa rota retorna as editoras cadastrados de forma paginada, realizando um GET na rota `localhost:5000/livraria-ecom/estoque/editoras` (protegida por guard), devem ser enviados os parâmetros de pagina e limite e o retorno segue o modelo de exemplo à seguir:
+
+```json
+{
+    "data": [
+        {
+            "cnpj": "04713695000100",
+            "nome": "Alta Books",
+            "telefone": "2132788069",
+            "email": "suporte@altabooks.com"
+        }
+    ],
+    "paginacao": {
+        "pagina": 0,
+        "limite": 5,
+        "total": 1
+    }
+}
+```
+
 ## Cadastro de Livros (Estoque)
 
 Para registrar um novo livro em estoque , é necessário enviar um POST na rota `localhost:5000/livraria-ecom/estoque`, essa requisição é protegida por guard e deve ser enviado no campo Authorization header o access_token retornado na requisição de login como `Bearer`. No body da requisiçãp, deve ser enviado um payload no formato à seguir:
+
+**OBS: caso autores e editoras retornados nas buscar anteriores não forem satistórios, preencher as informações do payload de cadastro de livro automaticamente cadastram novo autor e editora**
 
 ```
 {

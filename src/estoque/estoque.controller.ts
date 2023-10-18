@@ -15,4 +15,14 @@ export class EstoqueController {
     findAll(@Query('pagina') pagina: number, @Query('limite') limite: number) {
         return this.estoqueService.findAll(pagina, limite)
     }
+
+    @Get('/autores')
+    findAllAutores(@Query('pagina') pagina: number, @Query('limite') limite: number) {
+        return this.estoqueService.findAllAutores(pagina, limite)
+    }
+
+    @Get('/editoras')
+    findAllEditoras(@Query('pagina') pagina: number, @Query('limite') limite: number) {
+        return this.estoqueService.findAllEditoras(pagina, limite)
+    }
 }

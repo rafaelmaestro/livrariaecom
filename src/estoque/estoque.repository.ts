@@ -8,13 +8,6 @@ import { LivroModel } from './models/livro.model'
 
 @Injectable()
 export class EstoqueRepository {
-    findAll(pagina: number, limite: number) {
-        return LivroModel.find({
-            relations: ['autor', 'editora', 'estoque'],
-            skip: pagina,
-            take: limite,
-        })
-    }
     constructor(private readonly dataSource: DataSource) {}
 
     async save(estoque: CreateLivroDto) {
@@ -56,5 +49,26 @@ export class EstoqueRepository {
         } finally {
             await queryRunner.release()
         }
+    }
+
+    findAll(pagina: number, limite: number) {
+        return LivroModel.find({
+            relations: ['autor', 'editora', 'estoque'],
+            skip: pagina,
+            take: limite,
+        })
+    }
+
+    findAllEditoras(pagina: number, limite: number) {
+        return EditoraModel.find({
+            skip: pagina,
+            take: limite,
+        })
+    }
+    findAllAutores(pagina: number, limite: number) {
+        return AutorModel.find({
+            skip: pagina,
+            take: limite,
+        })
     }
 }
