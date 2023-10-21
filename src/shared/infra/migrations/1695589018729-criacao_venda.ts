@@ -32,9 +32,7 @@ export class CriacaoVenda1695589018729 implements MigrationInterface {
                 forma_pagamento VARCHAR(10) NOT NULL
                 CHECK (forma_pagamento in ('pix', 'cartao', 'boleto') ),
                 codigo_carrinho INTEGER NOT NULL,
-                FOREIGN KEY (codigo_carrinho) REFERENCES carrinho(codigo),
-                cpf VARCHAR(15) NOT NULL,
-                FOREIGN KEY (cpf) REFERENCES usuario(cpf)
+                FOREIGN KEY (codigo_carrinho) REFERENCES carrinho(codigo)
             )`
         )
 
@@ -43,9 +41,7 @@ export class CriacaoVenda1695589018729 implements MigrationInterface {
                 codigo  INTEGER PRIMARY KEY AUTO_INCREMENT,
                 xml VARCHAR(255) NOT NULL,
                 nsu INTEGER not null unique,
-                FOREIGN KEY (nsu) REFERENCES pagamento(nsu),
-                codigo_carrinho INTEGER not null unique,
-                FOREIGN KEY (codigo_carrinho) REFERENCES carrinho(codigo)
+                FOREIGN KEY (nsu) REFERENCES pagamento(nsu)
             )`
         )
 

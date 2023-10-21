@@ -1,4 +1,5 @@
 import { BaseEntity, Column, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
+import { CarrinhoModel } from '../../venda/models/carrinho.model'
 import { EnderecoUsuarioModel } from './endereco.model'
 import { UsuarioAdminModel } from './usuario-admin.model'
 
@@ -18,6 +19,9 @@ export class UsuarioModel extends BaseEntity {
 
     @Column()
     senha: string
+
+    @OneToMany(() => CarrinhoModel, (carrinho) => carrinho.usuario)
+    carrinhos: CarrinhoModel[]
 
     @OneToMany(() => EnderecoUsuarioModel, (endereco) => endereco.usuario, { eager: true })
     enderecos: EnderecoUsuarioModel[]

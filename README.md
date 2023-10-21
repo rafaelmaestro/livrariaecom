@@ -200,3 +200,45 @@ O retorno seguirá o padrão à seguir:
     }
 }
 ```
+
+# Venda
+
+## Inicializar carrinho
+
+Para iniciar um processo de pedido para um cliente, é necessário inicializar um carro sem nenhum produto antes, para isso realizar um POST na rota `localhost:5000/livraria-ecom/venda/carrinho` (**rota protegida pelo guard**) passando no body da requisição, o cpf do cliente.
+
+Exemplo:
+
+```json
+{
+    "cpf": "52776389803"
+}
+```
+
+O retorno seguirá o modelo à seguir:
+
+```json
+{
+    "codigo": 3,
+    "situacao": "aguardando_pagamento",
+    "cpf": "52776789807"
+}
+```
+
+## Manipular produtos no carrinho
+
+Após inicialização do carrinho, para manipular os itens é necessário realizar um requisição do tipo PATCH para a rota `localhost:5000/livraria-ecom/venda/carrinho` (**rota protegida pelo guard**), passando no body o código do carrinho, quantidade e isbn.
+
+**OBS: para incrementar a quantidade, passar um número POSITIVO, e para decrementar, um número NEGATIVO**
+
+Exemplo:
+
+```json
+{
+    "codigo_carrinho": 3,
+    "quantidade": -1,
+    "isbn": "9788550804777"
+}
+```
+
+Em caso de sucesso a rota retorna apenas código 200, mas pode retornar algumas exceçoes específicas, como por exemplo, numa tentativa de inserir ou retirar um produto de um carrinho já pago, ou ainda inserir uma quantidade não disponível em estoque de um livro.

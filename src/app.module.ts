@@ -8,19 +8,37 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
+import { EstoqueModule } from './estoque/estoque.module'
 import { UsuarioModule } from './usuario/usuario.module'
-import { EstoqueModule } from './estoque/estoque.module';
+import { CarrinhoPagoFilter } from './venda/filters/carrinho-pago.filter'
+import { EstoqueInsuficienteFilter } from './venda/filters/estoque-insuficiente.filter'
+import { VendaModule } from './venda/venda.module'
 
 setEnv()
 
 @Module({
-    imports: [...Modules, TypeOrmModule?.forRoot({ ...OrmModuleOptions }), UsuarioModule, AuthModule, EstoqueModule],
+    imports: [
+        ...Modules,
+        TypeOrmModule?.forRoot({ ...OrmModuleOptions }),
+        UsuarioModule,
+        AuthModule,
+        EstoqueModule,
+        VendaModule,
+    ],
     controllers: [AppController],
     providers: [
         AppService,
         {
             provide: APP_GUARD,
             useClass: JwtAuthGuard,
+        },
+        {
+            provide: 'APP_FILTER',
+            useValue: EstoqueInsuficienteFilter,
+        },
+        {
+            provide: 'APP_FILTER',
+            useValue: CarrinhoPagoFilter,
         },
     ],
 })

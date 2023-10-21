@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm'
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
+import { ItemCarrinhoModel } from '../../venda/models/itemCarrinho.model'
 import { AutorModel } from './autor.model'
 import { EditoraModel } from './editora.model'
 import { EstoqueModel } from './estoque.model'
@@ -34,4 +35,7 @@ export class LivroModel extends BaseEntity {
     @OneToOne(() => EstoqueModel, (estoque) => estoque.livro, { eager: true })
     @JoinColumn({ name: 'isbn', referencedColumnName: 'isbn' })
     estoque: EstoqueModel
+
+    @OneToMany(() => ItemCarrinhoModel, (itemCarrinho) => itemCarrinho.livro)
+    itensCarrinho: ItemCarrinhoModel[]
 }

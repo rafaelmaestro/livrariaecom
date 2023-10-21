@@ -2,6 +2,25 @@ import { MigrationInterface, QueryRunner } from 'typeorm'
 
 export class CriacaoTriggers1695589689988 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`
+            CREATE PROCEDURE public.DeleteItemIfQuantityNegative(
+                IN codigo_carrinho1 INT,
+                IN isbn1 VARCHAR(255),
+                IN new_quantity INT
+            )
+            BEGIN
+                DECLARE total_quantity INT;
+            
+                SELECT SUM(quantidade) INTO total_quantity
+                FROM itens_carrinho
+                WHERE codigo_carrinho = codigo_carrinho1 AND isbn = isbn1;
+            
+                IF new_quantity < 0 AND (total_quantity + new_quantity <= 0) THEN
+                    DELETE FROM itens_carrinho
+                    WHERE codigo_carrinho = codigo_carrinho1 AND isbn = isbn1;
+                END IF;
+            END
+        `)
         // Deletar item da itens_carrinho atualiza estoque
 
         await queryRunner.query(`
@@ -24,6 +43,10 @@ export class CriacaoTriggers1695589689988 implements MigrationInterface {
             BEGIN
                 IF NEW.quantidade > (SELECT quantidade FROM estoque WHERE isbn = NEW.isbn) THEN
                     SIGNAL SQLSTATE '20000' SET MESSAGE_TEXT = 'Nao ha estoque suficiente desse produto!';
+                END IF;
+
+                IF (SELECT situacao FROM carrinho WHERE codigo = NEW.codigo_carrinho) = 'pago' THEN
+                    SIGNAL SQLSTATE '20002' SET MESSAGE_TEXT = 'Esse carrinho ja foi pago, portanto não pode ser alterado!';
                 END IF;
             END;
         `)
