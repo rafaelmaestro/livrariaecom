@@ -15,7 +15,6 @@ export class UsuarioController {
 
     @Get(':cpf')
     async findByCpf(cpf: string) {
-        console.log(`CONTROLLER CPF ${cpf}`)
         const usuario = await this.usuarioService.findByCpf(cpf)
         return {
             ...usuario,

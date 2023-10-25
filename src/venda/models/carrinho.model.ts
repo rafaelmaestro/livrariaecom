@@ -19,7 +19,7 @@ export class CarrinhoModel extends BaseEntity {
     usuario: UsuarioModel
 
     @OneToMany(() => ItemCarrinhoModel, (itemCarrinho) => itemCarrinho.carrinho, { eager: true })
-    itensCarrinho: ItemCarrinhoModel[]
+    itens_carrinho: ItemCarrinhoModel[]
 
     @OneToOne(() => PagamentoModel, (pagamento) => pagamento.carrinho, { eager: true })
     pagamento: PagamentoModel

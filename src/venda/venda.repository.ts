@@ -53,12 +53,14 @@ export class VendaRepository {
                 ON DUPLICATE KEY UPDATE quantidade = quantidade + ${adicionarProdutoDto.quantidade};
             `)
 
-            await queryRunner.manager.query(`
+            if (adicionarProdutoDto.quantidade < 0) {
+                await queryRunner.manager.query(`
                 CALL DeleteItemIfQuantityNegative(
                     ${adicionarProdutoDto.codigo_carrinho}, 
                     ${adicionarProdutoDto.isbn},
                     ${adicionarProdutoDto.quantidade});
-            `)
+                `)
+            }
 
             await queryRunner.commitTransaction()
         } catch (error) {
@@ -74,5 +76,18 @@ export class VendaRepository {
         } finally {
             await queryRunner.release()
         }
+    }
+
+    async consultarCarrinho(codigo: number) {
+        const carrinhoExistente = await CarrinhoModel.findOne({
+            where: { codigo },
+            relations: ['itens_carrinho', 'pagamento', 'itens_carrinho.livro'],
+        })
+
+        if (!carrinhoExistente) {
+            return null
+        }
+
+        return carrinhoExistente
     }
 }

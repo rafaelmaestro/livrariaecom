@@ -22,7 +22,6 @@ export class UsuarioService {
     }
 
     findByCpf(cpf: string) {
-        console.log(cpf)
         return this.usuarioRepository.findOneByCpf(cpf)
     }
 }

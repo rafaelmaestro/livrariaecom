@@ -205,7 +205,7 @@ O retorno seguirá o padrão à seguir:
 
 ## Inicializar carrinho
 
-Para iniciar um processo de pedido para um cliente, é necessário inicializar um carro sem nenhum produto antes, para isso realizar um POST na rota `localhost:5000/livraria-ecom/venda/carrinho` (**rota protegida pelo guard**) passando no body da requisição, o cpf do cliente.
+Para iniciar um processo de pedido para um cliente, é necessário inicializar um carro sem nenhum produto antes, para isso realizar um POST na rota `localhost:5000/livraria-ecom/venda/carrinho` (**rota protegida pelo guard**) passando no body da requisição, o cpf do cliente. Caso o cliente já tenha um carrinho com situação igual à aguardando_pagamento, este será retornado e não será criado um novo.
 
 Exemplo:
 
@@ -242,3 +242,31 @@ Exemplo:
 ```
 
 Em caso de sucesso a rota retorna apenas código 200, mas pode retornar algumas exceçoes específicas, como por exemplo, numa tentativa de inserir ou retirar um produto de um carrinho já pago, ou ainda inserir uma quantidade não disponível em estoque de um livro.
+
+## Retornar carrinho
+
+Para retornar informações gerais do carrinho, realizar GET na rota `localhost:5000/livraria-ecom/venda/carrinho` (**protegida pelo guard**), fornecendo como query paramater o codigo do carrinho, o retorno seguirá o modelo à seguir:
+
+```json
+{
+    "codigo": 3,
+    "situacao": "aguardando_pagamento",
+    "cpf": "52776789807",
+    "valor_total": 159.8,
+    "itens": [
+        {
+            "livro": {
+                "isbn": "9788550804777",
+                "titulo": "Código Limpo",
+                "valor": 79.9,
+                "imagem": null,
+                "autor": "Robert C. Martin"
+            },
+            "quantidade": 2
+        }
+    ],
+    "pagamento": null
+}
+```
+
+## Pagar Carrinho
