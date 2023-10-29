@@ -1,5 +1,6 @@
 import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable } from '@nestjs/common'
+import { SendMailEstoqueBaixo } from './interfaces/SendMailEstoqueBaixo.interface'
 import { sendMailPagamentoAprovado } from './interfaces/SendMailPagamentoAprovado.interface'
 
 @Injectable()
@@ -12,6 +13,36 @@ export class EMailerService {
             subject: assunto,
             text: corpo,
             html: html,
+        })
+    }
+
+    async sendMailEstoqueBaixo(props: SendMailEstoqueBaixo) {
+        let htmlProdutos = ''
+
+        for (const item of props.produtos) {
+            htmlProdutos += `
+            <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
+                <p><strong>Nome:</strong> ${item.nome}</p>
+                <p><strong>ISBN:</strong> ${item.isbn}</p>
+                <p><strong>Quantidade de vendas:</strong> ${item.quantidade_vendas}</p>
+                <p><strong>Quantidade em estoque:</strong> ${item.quantidade_em_estoque}</p>
+            </div>
+            `
+        }
+
+        await this.mailerService.sendMail({
+            to: props.destinatarios,
+            from: process.env.EMAIL_USER,
+            subject: 'Alerta de estoque baixo! 📚',
+            text: 'Alguns produtos campeões de venda estão com estoque baixo!',
+            html: `
+                <b>Olá!</b><br><br>
+                Alguns produtos campeões de venda estão com estoque baixo!<br /><br />
+                <b>Produtos:</b><br />
+                ${htmlProdutos} <br><hr><br>
+                <b>Atenciosamente, <br>
+                E-mail automático. Livraria 📚</b>
+            `,
         })
     }
 

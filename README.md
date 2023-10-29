@@ -81,6 +81,25 @@ _OBS: Caso utilize o ThunderClient para requisições no VSCode, o arquivo `thun
 
 _A rota de login retornará um access_token que deverá ser salvo pelo frontend para requisições futuras às rotas protegidas pelo guard jwt. O token deve ser informado nas requisições futuras como Authorization Bearer._
 
+## Obter Endereços do Usuário
+
+Para obter os endereços cadastradas do usuário, realizar GET na rota `localhost:5000/livraria-ecom/usuario/$cpf/enderecos` fornecendo o cpf do usuario como parâmetro (**rota protegida pelo guard**).
+
+O retorno segue o padrão à seguir:
+
+```json
+[
+    {
+        "id": 1,
+        "rua": "Rua Jao de Barro, 65",
+        "cep": "18137-191",
+        "estado": "SP",
+        "cidade": "São Roque",
+        "cpf": "527777788809"
+    }
+]
+```
+
 # Livros (Estoque)
 
 ## Buscar Autores
@@ -200,6 +219,22 @@ O retorno seguirá o padrão à seguir:
     }
 }
 ```
+
+## Alterar preço de livro
+
+Para alterar preço de um livro, realizar POST na rota `localhost:5000/livraria-ecom/estoque/$isbn/alterar-preco` (**protegida pelo guard**), passando como parâmetro o isbn do livro e no body o valor à ser atualizado.
+
+Exemplo:
+
+`localhost:5000/livraria-ecom/estoque/FO8442026867387233/alterar-preco`
+
+```json
+{
+    "valor": "70.90"
+}
+```
+
+O retorno será um código 201 em caso de sucesso.
 
 # Venda
 
