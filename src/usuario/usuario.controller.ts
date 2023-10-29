@@ -21,4 +21,10 @@ export class UsuarioController {
             senha: undefined,
         }
     }
+
+    @Get(':cpf/enderecos')
+    async findEnderecosByCpf(cpf: string) {
+        const usuario = await this.usuarioService.findByCpf(cpf)
+        return usuario.enderecos
+    }
 }
