@@ -9,6 +9,7 @@ import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard'
 import { EstoqueModule } from './estoque/estoque.module'
+import { EMailerModule } from './mailer/mailer.module'
 import { UsuarioModule } from './usuario/usuario.module'
 import { CarrinhoPagoFilter } from './venda/filters/carrinho-pago.filter'
 import { EstoqueInsuficienteFilter } from './venda/filters/estoque-insuficiente.filter'
@@ -24,6 +25,7 @@ setEnv()
         AuthModule,
         EstoqueModule,
         VendaModule,
+        EMailerModule,
     ],
     controllers: [AppController],
     providers: [

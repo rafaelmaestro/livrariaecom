@@ -24,5 +24,6 @@ export class PagamentoModel extends BaseEntity {
     carrinho: CarrinhoModel
 
     @OneToOne(() => NfePagamentoModel, (nfePagamento) => nfePagamento.pagamento)
+    @JoinColumn({ name: 'nsu', referencedColumnName: 'nsu' })
     nfePagamento: NfePagamentoModel
 }

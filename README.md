@@ -270,3 +270,24 @@ Para retornar informações gerais do carrinho, realizar GET na rota `localhost:
 ```
 
 ## Pagar Carrinho
+
+Para realizar o pagamento de um carrinho, realizar POST na rota `localhost:5000/livraria-ecom/venda/carrinho/:codigo_carrinho/pagamento` (**protegida pelo guard**), passando na url o código do carrinho à ser pago e no body a forma de pagamento, seguindo o formato `cartao, pix ou boleto`.
+
+Exemplo:
+
+`localhost:5000/livraria-ecom/venda/carrinho/3/pagamento`
+
+```json
+{
+    "forma_pagamento": "cartao"
+}
+```
+
+O retorno será um código 201 em caso de sucesso, em caso de erro, segue o padrão convencional com codigo e mensagem, como por exemplo:
+
+```json
+{
+    "statusCode": 400,
+    "message": "Este carrinho já está pago e não pode ser alterado."
+}
+```

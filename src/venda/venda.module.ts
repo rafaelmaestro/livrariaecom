@@ -1,5 +1,6 @@
 import { Module, forwardRef } from '@nestjs/common'
 import { EstoqueModule } from '../estoque/estoque.module'
+import { EMailerModule } from '../mailer/mailer.module'
 import { UsuarioModule } from '../usuario/usuario.module'
 import { CarrinhoModel } from './models/carrinho.model'
 import { ItemCarrinhoModel } from './models/itemCarrinho.model'
@@ -11,6 +12,6 @@ import { VendaService } from './venda.service'
     controllers: [VendaController],
     providers: [VendaService, VendaRepository, CarrinhoModel, ItemCarrinhoModel],
     exports: [ItemCarrinhoModel, CarrinhoModel],
-    imports: [forwardRef(() => UsuarioModule), forwardRef(() => EstoqueModule)],
+    imports: [forwardRef(() => UsuarioModule), forwardRef(() => EstoqueModule), EMailerModule],
 })
 export class VendaModule {}

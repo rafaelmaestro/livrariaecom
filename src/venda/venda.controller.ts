@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Patch, Post, Query, UseFilters } from '@nestjs/common'
+import { Body, Controller, Get, Param, Patch, Post, Query, UseFilters } from '@nestjs/common'
 import { AdicionarProdutoDto } from './dto/adicionar-produto.dto'
 import { CreateCarrinhoDto } from './dto/create-carrinho.dto'
 import { CarrinhoPagoFilter } from './filters/carrinho-pago.filter'
 import { EstoqueInsuficienteFilter } from './filters/estoque-insuficiente.filter'
 import { VendaService } from './venda.service'
+import { PagarCarrinhoDto } from './dto/pagar-carrinho.dto'
 
 @Controller('venda')
 export class VendaController {
@@ -23,5 +24,11 @@ export class VendaController {
     @Get('/carrinho')
     async consultarCarrinho(@Query('codigo') codigo: number) {
         return await this.vendaService.consultarCarrinho(codigo)
+    }
+
+    @Post('/carrinho/:codigo/pagamento')
+    @UseFilters(CarrinhoPagoFilter)
+    async pagarCarrinho(@Param('codigo') codigo: number, @Body() pagarCarrinho: PagarCarrinhoDto) {
+        return await this.vendaService.pagarCarrinho(codigo, pagarCarrinho.forma_pagamento)
     }
 }

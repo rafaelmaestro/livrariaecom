@@ -91,7 +91,7 @@ export class CriacaoTriggers1695589689988 implements MigrationInterface {
             CREATE TRIGGER pagamento_BEFORE_INSERT BEFORE INSERT ON pagamento FOR EACH ROW
             BEGIN
                 IF (SELECT situacao FROM carrinho WHERE codigo = NEW.codigo_carrinho) = 'pago' THEN
-                    SIGNAL SQLSTATE '20000' SET MESSAGE_TEXT = 'Esse carrinho ja foi pago!';
+                    SIGNAL SQLSTATE '20005' SET MESSAGE_TEXT = 'Esse carrinho ja foi pago!';
                 END IF;
             END;
         `)

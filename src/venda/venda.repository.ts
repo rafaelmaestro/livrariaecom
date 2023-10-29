@@ -5,6 +5,7 @@ import { CreateCarrinhoDto } from './dto/create-carrinho.dto'
 import { CarrinhoPagoError } from './errors/carrinho-pago.error'
 import { EstoqueInsuficienteError } from './errors/estoque-insuficiente.error'
 import { CarrinhoModel } from './models/carrinho.model'
+import { IPagarCarrinho } from './interfaces/PagarCarrinho.interface'
 
 @Injectable()
 export class VendaRepository {
@@ -81,7 +82,7 @@ export class VendaRepository {
     async consultarCarrinho(codigo: number) {
         const carrinhoExistente = await CarrinhoModel.findOne({
             where: { codigo },
-            relations: ['itens_carrinho', 'pagamento', 'itens_carrinho.livro'],
+            relations: ['itens_carrinho', 'pagamento', 'itens_carrinho.livro', 'pagamento.nfePagamento'],
         })
 
         if (!carrinhoExistente) {
@@ -89,5 +90,58 @@ export class VendaRepository {
         }
 
         return carrinhoExistente
+    }
+
+    async pagarCarrinho(pagarCarrinho: IPagarCarrinho) {
+        const queryRunner = this.dataSource.createQueryRunner()
+        await queryRunner.connect()
+        await queryRunner.startTransaction()
+
+        try {
+            await queryRunner.manager.query(`
+                INSERT INTO pagamento (codigo_carrinho, forma_pagamento, data_pagamento, valor_total, nsu)
+                VALUES (
+                    ${pagarCarrinho.codigo_carrinho},
+                    '${pagarCarrinho.forma_pagamento}',
+                    '${pagarCarrinho.data_pagamento}',
+                    ${pagarCarrinho.valor_total},
+                    ${Number(pagarCarrinho.nsu)}
+                );
+            `)
+
+            await queryRunner.commitTransaction()
+        } catch (error) {
+            await queryRunner.rollbackTransaction()
+            if (error.sqlState === '20005') {
+                throw new CarrinhoPagoError()
+            } else {
+                throw error
+            }
+        } finally {
+            await queryRunner.release()
+        }
+    }
+
+    async inserirXmlNfe(nsu: number, xml: string) {
+        const queryRunner = this.dataSource.createQueryRunner()
+        await queryRunner.connect()
+        await queryRunner.startTransaction()
+
+        try {
+            await queryRunner.manager.query(`
+                INSERT INTO nfe_pagamento (nsu, xml)
+                VALUES (
+                    ${nsu},
+                    '${xml}'
+                );
+            `)
+
+            await queryRunner.commitTransaction()
+        } catch (error) {
+            await queryRunner.rollbackTransaction()
+            throw error
+        } finally {
+            await queryRunner.release()
+        }
     }
 }

@@ -23,6 +23,7 @@
         "typeorm": "cross-env APP_ENV=dev node --require ts-node/register ./node_modules/typeorm/cli.js"
     },
     "dependencies": {
+        "@nestjs-modules/mailer": "^1.9.1",
         "@nestjs/common": "^9.0.0",
         "@nestjs/core": "^9.0.0",
         "@nestjs/cqrs": "^9.0.3",
@@ -40,6 +41,7 @@
         "fs": "^0.0.1-security",
         "kafkajs": "^2.2.0",
         "mysql2": "^3.6.1",
+        "nodemailer": "^6.9.7",
         "passport": "^0.6.0",
         "passport-jwt": "^4.0.1",
         "passport-local": "^1.0.0",
@@ -57,6 +59,7 @@
         "@types/express": "^4.17.13",
         "@types/jest": "^28.1.8",
         "@types/node": "^17.0.29",
+        "@types/nodemailer": "^6.4.13",
         "@types/passport-jwt": "^3.0.10",
         "@types/passport-local": "^1.0.36",
         "@types/supertest": "^2.0.11",
