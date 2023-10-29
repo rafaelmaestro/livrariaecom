@@ -5,6 +5,7 @@ import { AutorModel } from './models/autor.model'
 import { EditoraModel } from './models/editora.model'
 import { EstoqueModel } from './models/estoque.model'
 import { LivroModel } from './models/livro.model'
+import { default_image } from './utils/default_image'
 
 @Injectable()
 export class EstoqueRepository {
@@ -24,7 +25,7 @@ export class EstoqueRepository {
                 isbn: livroCriado.isbn,
                 nome: livroCriado.nome,
                 valor: livroCriado.valor,
-                imagem: null,
+                imagem: livroCriado.imagem || default_image,
                 editora: {
                     cnpj: editoraCriada.cnpj,
                     nome: editoraCriada.nome,
@@ -70,5 +71,27 @@ export class EstoqueRepository {
             skip: pagina,
             take: limite,
         })
+    }
+
+    async alterarPreco(isbn: string, valor: number) {
+        const queryRunner = this.dataSource.createQueryRunner()
+        await queryRunner.connect()
+        await queryRunner.startTransaction()
+
+        try {
+            await queryRunner.manager.query(`
+                UPDATE livro SET valor = ${valor} WHERE isbn = '${isbn}';
+            `)
+            await queryRunner.commitTransaction()
+        } catch (error) {
+            await queryRunner.rollbackTransaction()
+            throw error
+        } finally {
+            await queryRunner.release()
+        }
+    }
+
+    async alertaEstoque() {
+        return LivroModel.query(`select * from public.prioridade_estoque pe;`)
     }
 }

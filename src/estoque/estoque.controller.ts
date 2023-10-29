@@ -1,4 +1,6 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
+import { Cron, CronExpression } from '@nestjs/schedule'
+import { IsPublic } from '../auth/decorators/is-public.decorator'
 import { CreateLivroDto } from './dto/create-livro.dto'
 import { EstoqueService } from './estoque.service'
 
@@ -24,5 +26,16 @@ export class EstoqueController {
     @Get('/editoras')
     findAllEditoras(@Query('pagina') pagina: number, @Query('limite') limite: number) {
         return this.estoqueService.findAllEditoras(pagina, limite)
+    }
+
+    @Post('/:isbn/alterar-preco')
+    alterarPreco(@Body('valor') valor: number, @Param('isbn') isbn: string) {
+        return this.estoqueService.alterarPreco(isbn, valor)
+    }
+
+    @IsPublic()
+    @Cron(CronExpression.EVERY_10_MINUTES)
+    async alertaEstoque() {
+        return await this.estoqueService.alertaEstoque()
     }
 }

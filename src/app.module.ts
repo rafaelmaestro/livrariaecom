@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { APP_GUARD } from '@nestjs/core'
+import { ScheduleModule } from '@nestjs/schedule'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Modules } from '.'
 import { setEnv } from '../config'
@@ -21,6 +22,7 @@ setEnv()
     imports: [
         ...Modules,
         TypeOrmModule?.forRoot({ ...OrmModuleOptions }),
+        ScheduleModule.forRoot(),
         UsuarioModule,
         AuthModule,
         EstoqueModule,
