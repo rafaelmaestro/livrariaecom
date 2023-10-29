@@ -82,17 +82,36 @@ export class VendaService {
             nsu,
         }
 
-        await this.vendaRepository.pagarCarrinho(objPagamento)
-        await this.gerarNotaFiscal(nsu, carrinho.cpf)
+        const usuario = await this.usuarioService.findByCpf(carrinho.cpf)
+
+        const [_, xml] = await Promise.all([
+            this.vendaRepository.pagarCarrinho(objPagamento),
+            this.gerarNotaFiscal(nsu, carrinho.cpf, usuario.nome),
+        ])
+
+        this.emailerService.sendMailPagamentoAprovado({
+            destinatario: usuario.email,
+            nome_destinario: usuario.nome,
+            xml,
+            pedido: {
+                codigo: carrinho.codigo,
+                itens: [
+                    ...carrinho.itens_carrinho.map((item) => ({
+                        titulo: item.livro.nome,
+                        valor: item.livro.valor,
+                        imagem: item.livro.imagem,
+                        quantidade: item.quantidade,
+                    })),
+                ],
+                valor: valorTotal,
+            },
+        })
     }
 
-    async gerarNotaFiscal(nsu: number, cpf: string) {
-        const usuario = await this.usuarioService.findByCpf(cpf)
-
-        const xml = `xml_de_teste_${nsu}_${cpf}_${usuario.nome}.xml`
-
+    async gerarNotaFiscal(nsu: number, cpf: string, nome: string) {
+        const xml = `xml_de_teste_${nsu}_${cpf}_${nome}.xml`
         await this.vendaRepository.inserirXmlNfe(nsu, xml)
-        await this.emailerService.sendMail(usuario.email, 'Pagamento Aprovado!', 'Seu pagamento foi aprovado!')
+        return xml
     }
 
     private generateRandomInt() {
