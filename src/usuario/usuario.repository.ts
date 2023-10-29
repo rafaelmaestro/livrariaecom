@@ -50,4 +50,23 @@ export class UsuarioRepository {
 
         return usuario
     }
+
+    async getAdmins() {
+        const admins = await UsuarioModel.createQueryBuilder('usuario')
+            .innerJoinAndSelect('usuario.admin', 'admin')
+            .getMany()
+
+        if (admins.length === 0) {
+            return []
+        }
+
+        const result = admins.map((admin) => {
+            return {
+                ...admin,
+                senha: undefined,
+            }
+        })
+
+        return result
+    }
 }

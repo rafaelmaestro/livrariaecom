@@ -24,4 +24,9 @@ export class UsuarioService {
     findByCpf(cpf: string) {
         return this.usuarioRepository.findOneByCpf(cpf)
     }
+
+    async getAdmins() {
+        const admins = await this.usuarioRepository.getAdmins()
+        return admins
+    }
 }
