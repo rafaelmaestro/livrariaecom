@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "livrariaecom",
-    "dateExported": "2023-10-01T17:09:34.116Z",
+    "dateExported": "2023-10-30T01:16:44.967Z",
     "version": "1.1",
     "folders": [],
     "requests": [
@@ -14,12 +14,12 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2023-10-01T16:46:09.799Z",
-            "modified": "2023-10-01T17:09:17.696Z",
+            "modified": "2023-10-18T00:15:42.242Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"cpf\": \"51777789906\",\n  \"senha\": \"Abc@123\"\n}",
+                "raw": "{\n  \"cpf\": \"52776789807\",\n  \"senha\": \"Abc@123\"\n}",
                 "form": []
             },
             "tests": []
@@ -33,13 +33,154 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2023-10-01T16:47:08.688Z",
-            "modified": "2023-10-01T17:09:03.616Z",
+            "modified": "2023-10-30T00:48:37.752Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"cpf\": \"51777789906\",\n  \"email\": \"rafaelmaestro@live.com.br\",\n  \"nome\": \"Rafael Maestro\",\n  \"telefone\": \"11995885668\",\n  \"senha\": \"Abc@123\",\n  \"rua\": \"Rua Castro Alves, 65\",\n  \"cep\": \"18136-090\",\n  \"estado\": \"SP\",\n  \"cidade\": \"São Roque\"\n}",
+                "raw": "{\n  \"cpf\": \"12332155567\",\n  \"email\": \"joaodasilva@live.com.br\",\n  \"nome\": \"João da Silva\",\n  \"telefone\": \"11994485668\",\n  \"senha\": \"Abc@123\",\n  \"rua\": \"Rua Mangaratiba, 65\",\n  \"cep\": \"18136-191\",\n  \"estado\": \"SP\",\n  \"cidade\": \"São Roque\"\n}",
                 "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "69b3e945-0291-4f0e-b176-0908bd208b25",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/relatorio",
+            "url": "localhost:5000/livraria-ecom/usuario/relatorio",
+            "method": "GET",
+            "sortNum": 22500,
+            "created": "2023-10-30T00:39:31.594Z",
+            "modified": "2023-10-30T00:58:19.403Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "25b354c7-4271-45d1-86af-81d13641e1ff",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "venda/inicializarCarrinho",
+            "url": "localhost:5000/livraria-ecom/venda/carrinho",
+            "method": "POST",
+            "sortNum": 25000,
+            "created": "2023-10-21T18:53:18.803Z",
+            "modified": "2023-10-21T21:44:38.380Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": \"52776789807\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NzkyNDY2NCwiZXhwIjoxNjk3OTI4MjY0fQ.gHrVQ2LaSX-sezZm5I8ruVg_AZXDh1e6zVJZ1yD1Mtw"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7bd97048-37d7-4a99-b5b8-c2e0d2c2dafd",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "venda Pagar carrinho",
+            "url": "localhost:5000/livraria-ecom/venda/carrinho/3/pagamento",
+            "method": "POST",
+            "sortNum": 25625,
+            "created": "2023-10-28T23:17:56.229Z",
+            "modified": "2023-10-29T16:03:21.959Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"forma_pagamento\": \"cartao\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODU5NTM5NiwiZXhwIjoxNjk4NTk4OTk2fQ.g212zqVcy2SLYfau0_0LurutiE4GbLa9IT0owz5Dx-k"
+            },
+            "tests": []
+        },
+        {
+            "_id": "c39f5b95-510e-420b-8e50-fa63034f5b89",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "venda/getCarrinhoPorCpf",
+            "url": "localhost:5000/livraria-ecom/venda/carrinho?codigo=3",
+            "method": "GET",
+            "sortNum": 26250,
+            "created": "2023-10-23T00:30:17.821Z",
+            "modified": "2023-10-29T00:23:30.607Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "codigo",
+                    "value": "3",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "3",
+                    "value": "",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "codigo",
+                    "value": "3",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODUzOTAwMiwiZXhwIjoxNjk4NTQyNjAyfQ.nfiaHg3JRPfo6C9ndeMkKMrFFUNMuToX8WxGiUFHMv4"
+            },
+            "tests": []
+        },
+        {
+            "_id": "7d532a1a-3b68-4599-99a4-58fb42438485",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "venda/relatorio",
+            "url": "localhost:5000/livraria-ecom/venda/relatorio",
+            "method": "GET",
+            "sortNum": 26875,
+            "created": "2023-10-30T00:10:56.969Z",
+            "modified": "2023-10-30T00:12:27.051Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "76258b05-4f75-4ae6-8375-890a3df4ef78",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "venda/adicionarProduto",
+            "url": "localhost:5000/livraria-ecom/venda/carrinho",
+            "method": "PATCH",
+            "sortNum": 27500,
+            "created": "2023-10-21T19:21:38.989Z",
+            "modified": "2023-10-23T00:50:44.680Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"codigo_carrinho\": 3,\n  \"quantidade\": 1,\n  \"isbn\": \"9788550804777\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODAyMTA2NiwiZXhwIjoxNjk4MDI0NjY2fQ.zxJb_i84QbK4KqrP_lmhQNjvkqnMjzmi0oD8dYspm8o"
             },
             "tests": []
         },
@@ -84,16 +225,264 @@
             "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
             "containerId": "",
             "name": "usuario/findByCpf",
-            "url": "localhost:5000/livraria-ecom/usuario/51777789906",
+            "url": "localhost:5000/livraria-ecom/usuario/12332155567",
             "method": "GET",
             "sortNum": 50000,
             "created": "2023-10-01T16:52:12.670Z",
-            "modified": "2023-10-01T17:09:24.953Z",
+            "modified": "2023-10-30T00:54:39.330Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NjE3ODI1OCwiZXhwIjoxNjk2MTgxODU4fQ.vt-mN85tWWqilnqg89m6qkj05VLrEE6fZh2u5hq8N-A"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "8b974629-05c9-4dea-8671-af98c221cd2b",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/ find enderecos",
+            "url": "localhost:5000/livraria-ecom/usuario/12332155567/enderecos",
+            "method": "GET",
+            "sortNum": 55000,
+            "created": "2023-10-29T16:18:29.343Z",
+            "modified": "2023-10-30T00:57:56.494Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b67ed421-f8fd-405f-a8aa-c18e7c3cae91",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/ add endereco",
+            "url": "localhost:5000/livraria-ecom/usuario/12332155567/enderecos",
+            "method": "PUT",
+            "sortNum": 57500,
+            "created": "2023-10-30T01:07:22.035Z",
+            "modified": "2023-10-30T01:08:51.565Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"rua\": \"Rua das Laranjeiras, 89\",\n  \"cep\": \"18136-090\",\n  \"estado\": \"SP\",\n  \"cidade\": \"São Roque\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9f87880b-70f1-4c8a-bce4-a80e5ffd0a1c",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/criar",
+            "url": "localhost:5000/livraria-ecom/estoque",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-10-18T00:11:01.933Z",
+            "modified": "2023-10-21T18:52:56.554Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"isbn\": \"9788550804777\",\n  \"nome\": \"Código Limpo\",\n  \"valor\": 79.90,\n  \"autor\": {\n    \"email\": \"rafaelmaestro@live.com\",\n    \"nome\": \"Robert C. Martin\"\n  },\n  \"editora\": {\n    \"cnpj\": \"04713695000100\",\n    \"nome\": \"Alta Books\",\n    \"email\": \"suporte@altabooks.com\",\n    \"telefone\": \"2132788069\"\n  },\n  \"estoque\": {\n    \"sku\": \"1503\",\n    \"quantidade\": 10,\n    \"isbn\": \"9788550804777\"\n  }\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NzkxNDM0MywiZXhwIjoxNjk3OTE3OTQzfQ.kxVhcT-yYBx0luR82jBkVOQagl5eHtOhFLDAYxh76e8"
+            },
+            "tests": []
+        },
+        {
+            "_id": "44fb669f-d009-4d56-806d-6004b834f0da",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/ alterar preco",
+            "url": "localhost:5000/livraria-ecom/estoque/FO8442026867387233/alterar-preco",
+            "method": "POST",
+            "sortNum": 65000,
+            "created": "2023-10-29T17:27:55.129Z",
+            "modified": "2023-10-29T17:30:21.935Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"valor\": \"70.90\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYwMDUzNywiZXhwIjoxNjk4NjA0MTM3fQ.Pur1epRxydgNhkI_Ha2dVml-S1gTA9mY-s2hsva86Wo"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ccd1efa3-fe95-4e30-9476-affcbda5be2e",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/findAll",
+            "url": "localhost:5000/livraria-ecom/estoque?pagina=0&limite=1",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-10-18T00:11:09.120Z",
+            "modified": "2023-10-23T01:26:46.083Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "pagina",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "limite",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODAyMTA2NiwiZXhwIjoxNjk4MDI0NjY2fQ.zxJb_i84QbK4KqrP_lmhQNjvkqnMjzmi0oD8dYspm8o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5ebfaf49-7664-4096-8bdc-7a02bfcdff94",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/relatorio",
+            "url": "localhost:5000/livraria-ecom/estoque/relatorio",
+            "method": "GET",
+            "sortNum": 72500,
+            "created": "2023-10-30T00:21:17.041Z",
+            "modified": "2023-10-30T00:21:49.952Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODYyNDczNywiZXhwIjoxNjk4NjI4MzM3fQ.ivphmvNn58b2V7xce9lz12rhcYrOuz7x9MxquY4zcTA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c391af2-c667-4b4e-8dba-c6dc7625b125",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/ relatorio",
+            "url": "localhost:5000/livraria-ecom/estoque/relatorio",
+            "method": "GET",
+            "sortNum": 75000,
+            "created": "2023-10-29T18:08:01.124Z",
+            "modified": "2023-10-29T18:08:17.182Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5ODAyMTA2NiwiZXhwIjoxNjk4MDI0NjY2fQ.zxJb_i84QbK4KqrP_lmhQNjvkqnMjzmi0oD8dYspm8o"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a703a011-fd22-4a53-a8cc-f11b87194723",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/findAllAutores",
+            "url": "localhost:5000/livraria-ecom/estoque/autores?pagina=0&limite=5",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-10-18T00:11:15.660Z",
+            "modified": "2023-10-21T18:53:06.142Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "pagina",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "limite",
+                    "value": "5",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbS5iciIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NzkxNDM0MywiZXhwIjoxNjk3OTE3OTQzfQ.kxVhcT-yYBx0luR82jBkVOQagl5eHtOhFLDAYxh76e8"
+            },
+            "tests": []
+        },
+        {
+            "_id": "53bbb05e-657a-43f5-b660-f80631e5d35a",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "estoque/findAllEditoras",
+            "url": "localhost:5000/livraria-ecom/estoque/editoras?pagina=0&limite=5",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-10-18T00:11:27.679Z",
+            "modified": "2023-10-18T00:16:11.528Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "pagina",
+                    "value": "0",
+                    "isPath": false
+                },
+                {
+                    "name": "limite",
+                    "value": "5",
+                    "isPath": false
+                }
+            ],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI1Mjc3Njc4OTgwNyIsInN1YiI6NTI3NzY3ODk4MDcsImVtYWlsIjoicmFmYWVsbWFlc3Ryb0BsaXZlLmNvbSIsIm5vbWUiOiJSYWZhZWwgTWFlc3RybyIsImlhdCI6MTY5NzU4ODE0MiwiZXhwIjoxNjk3NTkxNzQyfQ.xERTYhn4pVZv-5yOty4dobkmmTE5WkeMlYLXAu7rDgY"
+            },
+            "tests": []
+        },
+        {
+            "_id": "029bde46-6699-49b5-914c-578253af674a",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "usuario/criar",
+            "url": "localhost:5000/livraria-ecom/usuario",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2023-10-21T19:56:32.857Z",
+            "modified": "2023-10-21T19:56:32.857Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": \"52776789807\",\n  \"email\": \"rafaelmaestro@live.com\",\n  \"nome\": \"Rafael Maestro\",\n  \"telefone\": \"11995885628\",\n  \"senha\": \"Abc@123\",\n  \"rua\": \"Rua Castro Alves, 15\",\n  \"cep\": \"18136-090\",\n  \"estado\": \"SP\",\n  \"cidade\": \"São Roque\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "02f9488f-af8a-4cdb-8386-09d7ec5ba91d",
+            "colId": "08d91c69-5a40-4618-aaa1-ef2d4e9baaa7",
+            "containerId": "",
+            "name": "login",
+            "url": "localhost:5000/livraria-ecom/login",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-10-21T19:56:40.966Z",
+            "modified": "2023-10-21T19:56:40.966Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"cpf\": \"52776789807\",\n  \"senha\": \"Abc@123\"\n}",
+                "form": []
             },
             "tests": []
         }
