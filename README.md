@@ -81,6 +81,32 @@ _OBS: Caso utilize o ThunderClient para requisições no VSCode, o arquivo `thun
 
 _A rota de login retornará um access_token que deverá ser salvo pelo frontend para requisições futuras às rotas protegidas pelo guard jwt. O token deve ser informado nas requisições futuras como Authorization Bearer._
 
+## Obter Usuário pelo CPF
+
+Para obter os dados completos do usuario pelo cpf, realizar GET na rota `localhost:5000/livraria-ecom/usuario/$cpf` passando o cpf como parâmetro (**rota protegida pelo guard**).
+
+O retorno seguirá o exemplo à seguir:
+
+```json
+{
+    "cpf": "12332155567",
+    "nome": "João da Silva",
+    "email": "joaodasilva@live.com.br",
+    "telefone": "11994485668",
+    "enderecos": [
+        {
+            "id": 2,
+            "rua": "Rua Mangaratiba, 65",
+            "cep": "18136-191",
+            "estado": "SP",
+            "cidade": "São Roque",
+            "cpf": "12332155567"
+        }
+    ],
+    "admin": null
+}
+```
+
 ## Obter Endereços do Usuário
 
 Para obter os endereços cadastradas do usuário, realizar GET na rota `localhost:5000/livraria-ecom/usuario/$cpf/enderecos` fornecendo o cpf do usuario como parâmetro (**rota protegida pelo guard**).
@@ -99,6 +125,37 @@ O retorno segue o padrão à seguir:
     }
 ]
 ```
+
+## Relatório de Top Usuários
+
+Para emitir um relatório de usuário que mais compraram na loja, realizar GET na rota `localhost:5000/livraria-ecom/usuario/relatorio` (**protegida pelo guard**).
+
+O retorno seguirá o exemplo:
+
+```json
+[
+    {
+        "nome": "Rafael Maestro",
+        "email": "rafaelmaestro@tuamaeaquelaursa.com.br",
+        "valor_total_gasto": 159.8
+    }
+]
+```
+
+## Adicionar Endereço à Usuário Existente
+
+Para adicionar um novo endereço à um usuário já existente, realizar PUT na rota `localhost:5000/livraria-ecom/usuario/$cpf/enderecos` (**protegida pelo guard**) passando cpf como parâmetro, e no body as informações do endereço conforme exemplo à seguir:
+
+```json
+{
+    "rua": "Rua das Laranjeiras, 89",
+    "cep": "18136-090",
+    "estado": "SP",
+    "cidade": "São Roque"
+}
+```
+
+O retorno será um código 201 em caso de sucesso.
 
 # Livros (Estoque)
 
@@ -236,6 +293,29 @@ Exemplo:
 
 O retorno será um código 201 em caso de sucesso.
 
+## Relatório de Estoque
+
+Para emitir um relatório do estoque, realizar GET na rota `localhost:5000/livraria-ecom/estoque/relatorio` (**protegida pelo guard**).
+
+O retorno seguirá o exemplo:
+
+```json
+[
+    {
+        "nome": "Código Limpo",
+        "isbn": "GL6061333034883574",
+        "quantidade_vendida": 2,
+        "quantidade_em_estoque": 6
+    },
+    {
+        "nome": "Ideias Para Adiar o Fim do Mundo",
+        "isbn": "AE985824791581476961151",
+        "quantidade_vendida": 3,
+        "quantidade_em_estoque": 9
+    }
+]
+```
+
 # Venda
 
 ## Inicializar carrinho
@@ -325,4 +405,25 @@ O retorno será um código 201 em caso de sucesso, em caso de erro, segue o padr
     "statusCode": 400,
     "message": "Este carrinho já está pago e não pode ser alterado."
 }
+```
+
+## Relatório de Vendas
+
+Para emitir um relatório das vendas, realizar GET na rota `localhost:5000/livraria-ecom/venda/relatorio` (**protegida pelo guard**).
+
+O retorno seguirá o exemplo:
+
+```json
+[
+    {
+        "mes_referencia": 10,
+        "ano_referencia": 2023,
+        "valor_total": 159.8
+    },
+    {
+        "mes_referencia": 11,
+        "ano_referencia": 2023,
+        "valor_total": 10.8
+    }
+]
 ```

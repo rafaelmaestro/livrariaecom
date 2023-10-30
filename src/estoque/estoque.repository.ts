@@ -94,4 +94,15 @@ export class EstoqueRepository {
     async alertaEstoque() {
         return LivroModel.query(`select * from public.prioridade_estoque pe;`)
     }
+
+    getRelatorioEstoque() {
+        return LivroModel.query(`
+            select livro.nome, livro.isbn, t.quantidade_vendas, estoque.quantidade quantidade_em_estoque
+            from livro
+            inner join (select isbn, count(isbn) quantidade_vendas 
+                from itens_carrinho group by isbn) t on t.isbn = livro.isbn
+            inner join estoque on estoque.isbn = livro.isbn
+            order by t.quantidade_vendas desc;
+        `)
+    }
 }

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
-import { IsPublic } from '../auth/decorators/is-public.decorator'
+import { CurrentUser } from '../auth/decorators/current-user.decorator'
+import { Usuario } from '../usuario/entities/usuario.entity'
 import { CreateLivroDto } from './dto/create-livro.dto'
 import { EstoqueService } from './estoque.service'
 
@@ -33,9 +34,14 @@ export class EstoqueController {
         return this.estoqueService.alterarPreco(isbn, valor)
     }
 
-    @IsPublic()
+    // @IsPublic()
     @Cron(CronExpression.EVERY_10_MINUTES)
     async alertaEstoque() {
         return await this.estoqueService.alertaEstoque()
+    }
+
+    @Get('/relatorio')
+    async getRelatorioEstoque(@CurrentUser() user: Usuario) {
+        return await this.estoqueService.getRelatorioEstoque(user.cpf)
     }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { UnauthorizedError } from '../auth/errors/unauthorized.error'
 import { EMailerService } from '../mailer/mailer.service'
 import { UsuarioService } from '../usuario/usuario.service'
 import { CreateLivroDto } from './dto/create-livro.dto'
@@ -69,5 +70,28 @@ export class EstoqueService {
                 produtos: estoquesBaixos,
             })
         }
+    }
+
+    async getRelatorioEstoque(cpf: string) {
+        const usuario = await this.usuarioService.findByCpf(cpf)
+
+        if (!usuario) {
+            throw new Error('Usuário não encontrado')
+        }
+
+        if (usuario.admin != null) {
+            const relatorio = await this.estoqueRepository.getRelatorioEstoque()
+            console.log(relatorio)
+            return relatorio.map((item) => {
+                return {
+                    nome: item.nome,
+                    isbn: item.isbn,
+                    quantidade_vendida: Number(item.quantidade_vendas),
+                    quantidade_em_estoque: Number(item.quantidade_em_estoque),
+                }
+            })
+        }
+
+        throw new UnauthorizedError('Usuário não autorizado a acessar esse recurso')
     }
 }

@@ -4,8 +4,8 @@ import { AdicionarProdutoDto } from './dto/adicionar-produto.dto'
 import { CreateCarrinhoDto } from './dto/create-carrinho.dto'
 import { CarrinhoPagoError } from './errors/carrinho-pago.error'
 import { EstoqueInsuficienteError } from './errors/estoque-insuficiente.error'
-import { CarrinhoModel } from './models/carrinho.model'
 import { IPagarCarrinho } from './interfaces/PagarCarrinho.interface'
+import { CarrinhoModel } from './models/carrinho.model'
 
 @Injectable()
 export class VendaRepository {
@@ -143,5 +143,9 @@ export class VendaRepository {
         } finally {
             await queryRunner.release()
         }
+    }
+
+    async getRelatorioVendas() {
+        return CarrinhoModel.query(`select * from public.vendas_mes;`)
     }
 }

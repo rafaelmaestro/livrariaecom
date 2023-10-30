@@ -1,6 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { CurrentUser } from '../auth/decorators/current-user.decorator'
 import { IsPublic } from '../auth/decorators/is-public.decorator'
+import { CreateEnderecoDto } from './dto/create-endereco.dto'
 import { CreateUsuarioDto } from './dto/create-usuario.dto'
+import { Usuario } from './entities/usuario.entity'
 import { UsuarioService } from './usuario.service'
 
 @Controller('usuario')
@@ -13,8 +16,13 @@ export class UsuarioController {
         return this.usuarioService.create(createUsuarioDto)
     }
 
-    @Get(':cpf')
-    async findByCpf(cpf: string) {
+    @Get('/relatorio')
+    async getRelatorioUsuarios(@CurrentUser() user: Usuario) {
+        return await this.usuarioService.getRelatorioUsuarios(user.cpf)
+    }
+
+    @Get('/:cpf')
+    async findByCpf(@Param('cpf') cpf: string) {
         const usuario = await this.usuarioService.findByCpf(cpf)
         return {
             ...usuario,
@@ -22,9 +30,14 @@ export class UsuarioController {
         }
     }
 
-    @Get(':cpf/enderecos')
-    async findEnderecosByCpf(cpf: string) {
+    @Get('/:cpf/enderecos')
+    async findEnderecosByCpf(@Param('cpf') cpf: string) {
         const usuario = await this.usuarioService.findByCpf(cpf)
         return usuario.enderecos
+    }
+
+    @Put('/:cpf/enderecos')
+    async addEndereco(@Param('cpf') cpf: string, @Body() createEnderecoDto: CreateEnderecoDto) {
+        return await this.usuarioService.addEndereco(cpf, createEnderecoDto)
     }
 }

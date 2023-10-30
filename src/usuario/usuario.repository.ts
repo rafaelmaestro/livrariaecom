@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { DataSource } from 'typeorm'
+import { CreateEnderecoDto } from './dto/create-endereco.dto'
 import { CreateUsuarioDto } from './dto/create-usuario.dto'
 import { EnderecoUsuarioModel } from './models/endereco.model'
 import { UsuarioModel } from './models/usuario.model'
@@ -68,5 +69,34 @@ export class UsuarioRepository {
         })
 
         return result
+    }
+
+    async getRelatorioUsuario() {
+        return UsuarioModel.query(`select * from top_usuarios tu;`)
+    }
+
+    async addEndereco(cpf: string, endereco: CreateEnderecoDto) {
+        const queryRunner = this.dataSource.createQueryRunner()
+        await queryRunner.connect()
+        await queryRunner.startTransaction()
+        try {
+            await UsuarioModel.query(`
+                INSERT INTO endereco_usuario (cpf, rua, cep, estado, cidade)
+                VALUES (
+                    '${cpf}',
+                    '${endereco.rua}',
+                    '${endereco.cep}',
+                    '${endereco.estado}',
+                    '${endereco.cidade}'
+                )
+            `)
+
+            await queryRunner.commitTransaction()
+        } catch (error) {
+            await queryRunner.rollbackTransaction()
+            throw error
+        } finally {
+            await queryRunner.release()
+        }
     }
 }

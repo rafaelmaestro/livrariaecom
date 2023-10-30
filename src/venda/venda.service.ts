@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { UnauthorizedError } from '../auth/errors/unauthorized.error'
 import { EMailerService } from '../mailer/mailer.service'
 import { UsuarioService } from '../usuario/usuario.service'
 import { AdicionarProdutoDto } from './dto/adicionar-produto.dto'
@@ -112,6 +113,27 @@ export class VendaService {
         const xml = `xml_de_teste_${nsu}_${cpf}_${nome}.xml`
         await this.vendaRepository.inserirXmlNfe(nsu, xml)
         return xml
+    }
+
+    async getRelatorioVendas(cpf: string) {
+        const usuario = await this.usuarioService.findByCpf(cpf)
+
+        if (!usuario) {
+            throw new Error('Usuário não encontrado')
+        }
+
+        if (usuario.admin != null) {
+            const dados = await this.vendaRepository.getRelatorioVendas()
+            return dados.map((dado) => {
+                return {
+                    mes_referencia: dado.mes_referencia,
+                    ano_referencia: dado.ano_referencia,
+                    valor_total: dado.valor_total,
+                }
+            })
+        }
+
+        throw new UnauthorizedError('Usuário não autorizado a acessar esse recurso')
     }
 
     private generateRandomInt() {

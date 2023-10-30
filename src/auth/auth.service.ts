@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 import { Usuario } from '../usuario/entities/usuario.entity'
 import { UsuarioService } from '../usuario/usuario.service'
+import { UnauthorizedError } from './errors/unauthorized.error'
 import { UserPayload } from './interfaces/UserPayload'
 import { UserToken } from './interfaces/UserToken'
 
@@ -22,8 +23,7 @@ export class AuthService {
                 }
             }
         }
-
-        throw new Error('Cpf ou senha fornecidos são inválidos!')
+        throw new UnauthorizedError('Email ou senha fornecidos estão incorretos.')
     }
 
     login(user: Usuario): UserToken {

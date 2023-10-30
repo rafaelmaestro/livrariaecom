@@ -1,10 +1,12 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseFilters } from '@nestjs/common'
+import { CurrentUser } from '../auth/decorators/current-user.decorator'
+import { Usuario } from '../usuario/entities/usuario.entity'
 import { AdicionarProdutoDto } from './dto/adicionar-produto.dto'
 import { CreateCarrinhoDto } from './dto/create-carrinho.dto'
+import { PagarCarrinhoDto } from './dto/pagar-carrinho.dto'
 import { CarrinhoPagoFilter } from './filters/carrinho-pago.filter'
 import { EstoqueInsuficienteFilter } from './filters/estoque-insuficiente.filter'
 import { VendaService } from './venda.service'
-import { PagarCarrinhoDto } from './dto/pagar-carrinho.dto'
 
 @Controller('venda')
 export class VendaController {
@@ -30,5 +32,10 @@ export class VendaController {
     @UseFilters(CarrinhoPagoFilter)
     async pagarCarrinho(@Param('codigo') codigo: number, @Body() pagarCarrinho: PagarCarrinhoDto) {
         return await this.vendaService.pagarCarrinho(codigo, pagarCarrinho.forma_pagamento)
+    }
+
+    @Get('/relatorio')
+    async getRelatorioVendas(@CurrentUser() user: Usuario) {
+        return await this.vendaService.getRelatorioVendas(user.cpf)
     }
 }
