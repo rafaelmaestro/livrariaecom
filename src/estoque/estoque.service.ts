@@ -81,7 +81,6 @@ export class EstoqueService {
 
         if (usuario.admin != null) {
             const relatorio = await this.estoqueRepository.getRelatorioEstoque()
-            console.log(relatorio)
             return relatorio.map((item) => {
                 return {
                     nome: item.nome,

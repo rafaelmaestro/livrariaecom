@@ -41,7 +41,6 @@ export class UsuarioService {
 
         if (usuario.admin != null) {
             const relatorio = await this.usuarioRepository.getRelatorioUsuario()
-            console.log(relatorio)
             return relatorio.map((item) => {
                 return {
                     nome: item.nome,
