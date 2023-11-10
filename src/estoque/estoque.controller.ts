@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
 import { Cron, CronExpression } from '@nestjs/schedule'
 import { CurrentUser } from '../auth/decorators/current-user.decorator'
+import { IsPublic } from '../auth/decorators/is-public.decorator'
 import { Usuario } from '../usuario/entities/usuario.entity'
 import { CreateLivroDto } from './dto/create-livro.dto'
 import { EstoqueService } from './estoque.service'
@@ -14,6 +15,7 @@ export class EstoqueController {
         return this.estoqueService.create(createLivroDto)
     }
 
+    @IsPublic()
     @Get()
     findAll(@Query('pagina') pagina: number, @Query('limite') limite: number) {
         return this.estoqueService.findAll(pagina, limite)
