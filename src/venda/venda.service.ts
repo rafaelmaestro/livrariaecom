@@ -33,10 +33,10 @@ export class VendaService {
 
         if (carrinho) {
             return {
-                codigo: carrinho?.codigo,
-                situacao: carrinho?.situacao,
-                cpf: carrinho?.cpf,
-                valor_total: carrinho?.itens_carrinho
+                codigo: carrinho.codigo,
+                situacao: carrinho.situacao,
+                cpf: carrinho.cpf,
+                valor_total: carrinho.itens_carrinho
                     .map((item) => item.quantidade * item.livro.valor)
                     .reduce((a, b) => a + b, 0),
                 itens: [
@@ -51,7 +51,7 @@ export class VendaService {
                         quantidade: item.quantidade,
                     })),
                 ],
-                pagamento: carrinho?.pagamento,
+                pagamento: carrinho.pagamento,
             }
         }
         return carrinho
@@ -73,7 +73,7 @@ export class VendaService {
         }
 
         const valorTotal =
-            carrinho?.itens_carrinho.map((item) => item.quantidade * item.livro.valor).reduce((a, b) => a + b, 0) || 0
+            carrinho.itens_carrinho.map((item) => item.quantidade * item.livro.valor).reduce((a, b) => a + b, 0) || 0
 
         const objPagamento = {
             codigo_carrinho: codigo,

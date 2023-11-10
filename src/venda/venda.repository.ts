@@ -89,6 +89,8 @@ export class VendaRepository {
             return null
         }
 
+        console.log(carrinhoExistente)
+
         return carrinhoExistente
     }
 

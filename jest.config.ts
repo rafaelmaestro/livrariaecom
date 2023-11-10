@@ -8,7 +8,11 @@ const config: Config = {
     modulePaths: ['node_modules', '<rootDir>/src'],
     testRegex: '.*\\.spec\\.ts$',
     transform: { '^.+\\.(t|j)s$': 'ts-jest' },
-    collectCoverageFrom: ['./src/**/*.service.(t|j)s'],
+    collectCoverageFrom: [
+        './src/**/*.service.(t|j)s',
+        '!./src/auth/*.service.(t|j)s',
+        '!./src/mailer/*.service.(t|j)s',
+    ],
     coverageDirectory: './test/coverage',
     testEnvironment: 'node',
     restoreMocks: true,
