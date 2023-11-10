@@ -12,6 +12,8 @@ docker-compose -up
 
 OBS: Quaisquer alterações na conexão devem ser refletidas no arquivo de configuração dos containers em `docker-compose.yml` e nas váriaveis de ambiente no arquivo `.env`.
 
+**IMPORTANTE: no arquivo `sample.env` encontram-se algumas váriaveis de devem ser preenchidas no arquivo `.env` para o pleno funcionamento da aplicação, como por exemplo `EMAIL_USER` e `EMAIL_PASSWORD`, que são indispensáveis para que ocorra o envio de emails automatizado.**
+
 ## Instalação das depedências
 
 Para instalação das dependências do projeto Node, executar o seguinte comando no terminal:
@@ -49,20 +51,21 @@ npm run start
 Para registrar novo usuário, é necessário enviar um POST na rota `localhost:5000/livraria-ecom/usuario`,
 essa requisição não é protegida por guard e deve ser enviado no body o formato:
 
-```
+```json
 {
-  cpf: string;
-  email: string;
-  nome: string;
-  telefone: string;
-  senha: string;
-  rua: string;
-  cep: string;
-  estado: string;
-  cidade: string;
+    "cpf": "12332155567",
+    "email": "joaodasilva@live.com.br",
+    "nome": "João da Silva",
+    "telefone": "11994485668",
+    "senha": "Abc@123",
+    "rua": "Rua Mangaratiba, 65",
+    "cep": "18136-191",
+    "estado": "SP",
+    "cidade": "São Roque"
 }
-
 ```
+
+**IMPORTANTE: cep deve ser um numero de cep no padrão BR, e senha deve possui pelo menos 1 maiúscula e 1 número e 1 caractere especial**
 
 _OBS: Caso utilize o ThunderClient para requisições no VSCode, o arquivo `thunder-collection_livrariaecom.json` na raiz do projeto contém exemplos de requisições._
 
@@ -70,10 +73,10 @@ _OBS: Caso utilize o ThunderClient para requisições no VSCode, o arquivo `thun
 
 Para realizar login de usuário é necessário realizar POST na rota `localhost:5000/livraria-ecom/login`, informando no payload:
 
-```
+```json
 {
-  cpf: string,
-  senha: string
+    "cpf": "12332155567",
+    "senha": "Abc@123"
 }
 ```
 
@@ -207,29 +210,27 @@ Para registrar um novo livro em estoque , é necessário enviar um POST na rota 
 
 **OBS: caso autores e editoras retornados nas buscar anteriores não forem satistórios, preencher as informações do payload de cadastro de livro automaticamente cadastram novo autor e editora**
 
-```
+```json
 {
-    isbn: string
-    nome: string
-    valor: number
-    imagem?: string
-    autor: {
-      	email: string
-      	nome: string
-    }
-    editora: {
-		cnpj: string
-		nome: string
-		email: string
-		telefone: string
-    }
-    estoque: {
-		sku: string
-		quantidade: number
-		isbn: string
+    "isbn": "9788550804777",
+    "nome": "Código Limpo",
+    "valor": 79.9,
+    "autor": {
+        "email": "rafaelmaestro@live.com",
+        "nome": "Robert C. Martin"
+    },
+    "editora": {
+        "cnpj": "04713695000100",
+        "nome": "Alta Books",
+        "email": "suporte@altabooks.com",
+        "telefone": "2132788069"
+    },
+    "estoque": {
+        "sku": "1503",
+        "quantidade": 10,
+        "isbn": "9788550804777"
     }
 }
-
 ```
 
 ## Buscar Livros Em Estoque
