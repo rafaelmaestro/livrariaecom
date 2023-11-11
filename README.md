@@ -241,6 +241,8 @@ Para buscar os livros em estoque , é necessário enviar um GET na rota `localho
 localhost:5000/livraria-ecom/estoque?pagina=0&limite=5
 ```
 
+Também pode ser enviado um query parameter `like: string` para realizar a busca pelo nome de alguns livros de forma paginada.
+
 O retorno seguirá o padrão à seguir:
 
 ```json

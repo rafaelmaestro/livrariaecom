@@ -17,8 +17,8 @@ export class EstoqueController {
 
     @IsPublic()
     @Get()
-    findAll(@Query('pagina') pagina: number, @Query('limite') limite: number) {
-        return this.estoqueService.findAll(pagina, limite)
+    findAll(@Query('pagina') pagina: number, @Query('limite') limite: number, @Query('like') like?: string) {
+        return this.estoqueService.findAll(pagina, limite, like)
     }
 
     @Get('/autores')

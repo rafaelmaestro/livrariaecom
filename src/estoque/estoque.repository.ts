@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { DataSource } from 'typeorm'
+import { DataSource, Like } from 'typeorm'
 import { CreateLivroDto } from './dto/create-livro.dto'
 import { AutorModel } from './models/autor.model'
 import { EditoraModel } from './models/editora.model'
@@ -52,11 +52,20 @@ export class EstoqueRepository {
         }
     }
 
-    findAll(pagina: number, limite: number) {
+    findAll(pagina: number, limite: number, like?: string) {
+        let whereClause = {}
+
+        if (like) {
+            whereClause = {
+                nome: Like(`%${like}%`),
+            }
+        }
+
         return LivroModel.find({
             relations: ['autor', 'editora', 'estoque'],
             skip: pagina,
             take: limite,
+            where: whereClause,
         })
     }
 

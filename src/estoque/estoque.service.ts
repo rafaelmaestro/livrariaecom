@@ -20,8 +20,8 @@ export class EstoqueService {
         return livroCriado as Livro
     }
 
-    async findAll(pagina: number, limite: number): Promise<FindAllLivros> {
-        const estoque = await this.estoqueRepository.findAll(pagina, limite)
+    async findAll(pagina: number, limite: number, like?: string): Promise<FindAllLivros> {
+        const estoque = await this.estoqueRepository.findAll(pagina, limite, like)
         return {
             data: estoque,
             paginacao: {
