@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { DataSource } from 'typeorm'
 import { CreateEnderecoDto } from './dto/create-endereco.dto'
 import { CreateUsuarioDto } from './dto/create-usuario.dto'
+import { UsuarioExistenteError } from './errors/usuario-existente.error'
 import { EnderecoUsuarioModel } from './models/endereco.model'
 import { UsuarioModel } from './models/usuario.model'
 
@@ -14,6 +15,11 @@ export class UsuarioRepository {
         await queryRunner.connect()
         await queryRunner.startTransaction()
         try {
+            const usuarioExistente = await this.findOneByCpf(usuario.cpf)
+
+            if (usuarioExistente) {
+                throw new UsuarioExistenteError()
+            }
             const usuarioCriado = await queryRunner.manager.save(UsuarioModel, usuario)
             const enderecoCriado = await queryRunner.manager.save(EnderecoUsuarioModel, usuario)
 

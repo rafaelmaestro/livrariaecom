@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put, UseFilters } from '@nestjs/common'
 import { CurrentUser } from '../auth/decorators/current-user.decorator'
 import { IsPublic } from '../auth/decorators/is-public.decorator'
 import { CreateEnderecoDto } from './dto/create-endereco.dto'
 import { CreateUsuarioDto } from './dto/create-usuario.dto'
 import { Usuario } from './entities/usuario.entity'
+import { UsuarioExistenteFilter } from './filters/usuario-existente.filter'
 import { UsuarioService } from './usuario.service'
 
 @Controller('usuario')
@@ -12,6 +13,7 @@ export class UsuarioController {
 
     @IsPublic()
     @Post()
+    @UseFilters(UsuarioExistenteFilter)
     create(@Body() createUsuarioDto: CreateUsuarioDto) {
         return this.usuarioService.create(createUsuarioDto)
     }
