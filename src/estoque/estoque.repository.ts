@@ -63,7 +63,7 @@ export class EstoqueRepository {
 
         return LivroModel.find({
             relations: ['autor', 'editora', 'estoque'],
-            skip: pagina,
+            skip: (pagina - 1) * limite,
             take: limite,
             where: whereClause,
         })
