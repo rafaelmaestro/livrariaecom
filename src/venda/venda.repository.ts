@@ -58,7 +58,7 @@ export class VendaRepository {
                 await queryRunner.manager.query(`
                 CALL DeleteItemIfQuantityNegative(
                     ${adicionarProdutoDto.codigo_carrinho}, 
-                    ${adicionarProdutoDto.isbn},
+                    '${adicionarProdutoDto.isbn}',
                     ${adicionarProdutoDto.quantidade});
                 `)
             }
