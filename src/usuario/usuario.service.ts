@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
 import { UnauthorizedError } from '../auth/errors/unauthorized.error'
+import { EMailerService } from '../mailer/mailer.service'
 import { CreateEnderecoDto } from './dto/create-endereco.dto'
 import { CreateUsuarioDto } from './dto/create-usuario.dto'
 import { UsuarioRepository } from './usuario.repository'
 
 @Injectable()
 export class UsuarioService {
-    constructor(private readonly usuarioRepository: UsuarioRepository) {}
+    constructor(
+        private readonly usuarioRepository: UsuarioRepository,
+        private readonly emailerService: EMailerService
+    ) {}
     async create(createUsuarioDto: CreateUsuarioDto) {
         const usuario: CreateUsuarioDto = {
             ...createUsuarioDto,
@@ -41,13 +45,21 @@ export class UsuarioService {
 
         if (usuario.admin != null) {
             const relatorio = await this.usuarioRepository.getRelatorioUsuario()
-            return relatorio.map((item) => {
+            const relatorioMap = relatorio.map((item) => {
                 return {
                     nome: item.nome,
                     email: item.email,
                     valor_total_gasto: item.valor_total_gasto,
                 }
             })
+
+            this.emailerService.sendMailRelatorioUsuarios({
+                destinatario: usuario.email,
+                nome_destinatario: usuario.nome,
+                relatorio: relatorioMap,
+            })
+
+            return relatorioMap
         }
 
         throw new UnauthorizedError('Usuário não autorizado a acessar esse recurso')

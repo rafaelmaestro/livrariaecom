@@ -2,6 +2,9 @@ import { MailerService } from '@nestjs-modules/mailer'
 import { Injectable } from '@nestjs/common'
 import { SendMailEstoqueBaixo } from './interfaces/SendMailEstoqueBaixo.interface'
 import { sendMailPagamentoAprovado } from './interfaces/SendMailPagamentoAprovado.interface'
+import { SendMailRelatorioEstoque } from './interfaces/SendMailRelatorioEstoque.interface'
+import { SendMailRelatorioUsuarios } from './interfaces/SendMailRelatorioUsuarios.interface'
+import { SendMailRelatorioVenda } from './interfaces/SendMailRelatorioVenda.interface'
 
 @Injectable()
 export class EMailerService {
@@ -75,6 +78,76 @@ export class EMailerService {
                 <b>Atenciosamente, <br>
                 Equipe de vendas da Livraria 📚</b>
             `,
+        })
+    }
+
+    async sendMailRelatorioVenda(props: SendMailRelatorioVenda) {
+        await this.mailerService.sendMail({
+            to: props.destinatario,
+            from: process.env.EMAIL_USER,
+            subject: 'Seu relatório de vendas 📊💰',
+            text: `O seu relatório de vendas está em anexo.`,
+            html: `
+                <b>Olá ${props.nome_destinatario}!</b><br><br>
+                <p>Seu relatório de vendas solicitado está disponível à seguir!</p>
+                <ul>
+                    ${props.relatorio
+                        .map(
+                            (item) =>
+                                `<li>${item.mes_referencia}/${item.ano_referencia}: R$ ${item.valor_total.toFixed(
+                                    2
+                                )}</li>`
+                        )
+                        .join('')}
+                </ul>
+                <p><b>Atenciosamente,<br>Equipe de vendas da Livraria 📚</b></p>
+        `,
+        })
+    }
+
+    async sendMailRelatorioUsuarios(props: SendMailRelatorioUsuarios) {
+        await this.mailerService.sendMail({
+            to: props.destinatario,
+            from: process.env.EMAIL_USER,
+            subject: 'Seu relatório de usuários 📊👤',
+            text: `O seu relatório de usuários está em anexo.`,
+            html: `
+                <b>Olá ${props.nome_destinatario}!</b><br><br>
+                <p>Seu relatório de usuários solicitado está disponível à seguir!</p>
+                <ul>
+                    ${props.relatorio
+                        .map(
+                            (item) =>
+                                `<li>Nome: <b>${item.nome}</b> - Email: <b>${
+                                    item.email
+                                }</b> - Valor total gasto: <b>R$ ${item.valor_total_gasto.toFixed(2)}</b></li>`
+                        )
+                        .join('')}
+                </ul>
+                <p><b>Atenciosamente,<br>Equipe de vendas da Livraria 📚</b></p>
+        `,
+        })
+    }
+
+    async sendMailRelatorioEstoque(props: SendMailRelatorioEstoque) {
+        await this.mailerService.sendMail({
+            to: props.destinatario,
+            from: process.env.EMAIL_USER,
+            subject: 'Seu relatório de estoque 📊📚',
+            text: `O seu relatório de estoque está em anexo.`,
+            html: `
+                <b>Olá ${props.nome_destinatario}!</b><br><br>
+                <p>Seu relatório de estoque solicitado está disponível à seguir!</p>
+                <ul>
+                    ${props.relatorio
+                        .map(
+                            (item) =>
+                                `<li>Nome: <b>${item.nome}</b> - ISBN: <b>${item.isbn}</b> - Quantidade vendida: <b>${item.quantidade_vendida}</b> - Quantidade em estoque: <b>${item.quantidade_em_estoque}</b></li><br>`
+                        )
+                        .join('')}
+                </ul>
+                <p><b>Atenciosamente,<br>Equipe de vendas da Livraria 📚</b></p>
+        `,
         })
     }
 }

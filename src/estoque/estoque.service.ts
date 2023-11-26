@@ -81,7 +81,7 @@ export class EstoqueService {
 
         if (usuario.admin != null) {
             const relatorio = await this.estoqueRepository.getRelatorioEstoque()
-            return relatorio.map((item) => {
+            const relatorioMappped = relatorio.map((item) => {
                 return {
                     nome: item.nome,
                     isbn: item.isbn,
@@ -89,6 +89,14 @@ export class EstoqueService {
                     quantidade_em_estoque: Number(item.quantidade_em_estoque),
                 }
             })
+
+            this.emailerService.sendMailRelatorioEstoque({
+                destinatario: usuario.email,
+                nome_destinatario: usuario.nome,
+                relatorio: relatorioMappped,
+            })
+
+            return relatorioMappped
         }
 
         throw new UnauthorizedError('Usuário não autorizado a acessar esse recurso')

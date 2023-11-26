@@ -124,13 +124,19 @@ export class VendaService {
 
         if (usuario.admin != null) {
             const dados = await this.vendaRepository.getRelatorioVendas()
-            return dados.map((dado) => {
+            const relatorio = dados.map((dado) => {
                 return {
                     mes_referencia: dado.mes_referencia,
                     ano_referencia: dado.ano_referencia,
                     valor_total: dado.valor_total,
                 }
             })
+            this.emailerService.sendMailRelatorioVenda({
+                destinatario: usuario.email,
+                nome_destinatario: usuario.nome,
+                relatorio,
+            })
+            return relatorio
         }
 
         throw new UnauthorizedError('Usuário não autorizado a acessar esse recurso')
